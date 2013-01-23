@@ -8,8 +8,6 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
-
 /**
  * OrientDBRecord() test in OrientDB tests
  *
@@ -25,10 +23,10 @@ class OrientDBRecordSpeedTest extends PHPUnit_Framework_TestCase
         $runs = 10;
         $pwd = dirname(realpath(__FILE__));
         $text = file_get_contents($pwd . '/data/CharterofFundamentalRightsoftheEuropeanUnion.txt');
-        $content = 'text:' . OrientDBRecordEncoder::encodeString($text);
+        $content = 'text:' . \Gratheon\OrientDB\OrientDBRecordEncoder::encodeString($text);
         $timeStart = microtime(true);
         for ($i = 0; $i < $runs; $i++) {
-            $record = new OrientDBRecord();
+            $record = new \Gratheon\OrientDB\OrientDBRecord();
             $record->content = $content;
             $record->parse();
         }
@@ -49,7 +47,7 @@ class OrientDBRecordSpeedTest extends PHPUnit_Framework_TestCase
         $document = implode(',', $document);
         $timeStart = microtime(true);
         for ($i = 0; $i < $runs; $i++) {
-            $record = new OrientDBRecord();
+            $record = new \Gratheon\OrientDB\OrientDBRecord();
             $record->content = $document;
             $record->parse();
         }
@@ -70,7 +68,7 @@ class OrientDBRecordSpeedTest extends PHPUnit_Framework_TestCase
         $document = implode(',', $document);
         $timeStart = microtime(true);
         for ($i = 0; $i < $runs; $i++) {
-            $record = new OrientDBRecord();
+            $record = new \Gratheon\OrientDB\OrientDBRecord();
             $record->content = $document;
             $record->parse();
         }
@@ -92,7 +90,7 @@ class OrientDBRecordSpeedTest extends PHPUnit_Framework_TestCase
         $document = implode(',', $document);
         $timeStart = microtime(true);
         for ($i = 0; $i < $runs; $i++) {
-            $record = new OrientDBRecord();
+            $record = new \Gratheon\OrientDB\OrientDBRecord();
             $record->content = $document;
             $record->parse();
         }
@@ -113,7 +111,7 @@ class OrientDBRecordSpeedTest extends PHPUnit_Framework_TestCase
         $document = implode(',', $document);
         $timeStart = microtime(true);
         for ($i = 0; $i < $runs; $i++) {
-            $record = new OrientDBRecord();
+            $record = new \Gratheon\OrientDB\OrientDBRecord();
             $record->content = $document;
             $record->parse();
         }
@@ -134,7 +132,7 @@ class OrientDBRecordSpeedTest extends PHPUnit_Framework_TestCase
         $map = implode(',', $map);
         $timeStart = microtime(true);
         for ($i = 0; $i < $runs; $i++) {
-            $record = new OrientDBRecord();
+            $record = new \Gratheon\OrientDB\OrientDBRecord();
             $record->content = 'map:{' . $map . '}';
             $record->parse();
         }
@@ -149,7 +147,7 @@ class OrientDBRecordSpeedTest extends PHPUnit_Framework_TestCase
 
         $new_start = microtime(true);
         for ($i = 0; $i < $steps; $i++) {
-            $record = new OrientDBRecord();
+            $record = new \Gratheon\OrientDB\OrientDBRecord();
             $record->className = 'TestClass';
             $record->data->field1 = 'Data 1';
             $record->data->field2 = 13121982;
@@ -176,7 +174,7 @@ class OrientDBRecordSpeedTest extends PHPUnit_Framework_TestCase
 
         $new_start = microtime(true);
         for ($i = 0; $i < $steps; $i++) {
-            $record = new OrientDBRecord();
+            $record = new \Gratheon\OrientDB\OrientDBRecord();
             $record->className = 'TestClass';
             $record->data->field1 = 'Data 1';
             $record->data->field2 = 13121982;
@@ -185,7 +183,7 @@ class OrientDBRecordSpeedTest extends PHPUnit_Framework_TestCase
         $new_end = microtime(true) - $new_start;
 
         $reset_start = microtime(true);
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         for ($i = 0; $i < $steps; $i++) {
             $record->resetData();
             $record->data->field1 = 'Data 1';

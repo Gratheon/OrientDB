@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -17,6 +17,7 @@ require_once 'OrientDB_TestCase.php';
  * @author Anton Terekhov <anton@netmonsters.ru>
  * @package OrientDB-PHP
  * @subpackage Tests
+ * @property \Gratheon\OrientDB\OrientDB $db
  */
 class OrientDBDBCreateTest extends OrientDB_TestCase
 {
@@ -27,7 +28,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
     }
 
     protected function tearDown()
@@ -35,7 +36,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
         if ($this->db->isConnected()) {
             try {
                 $result = $this->db->DBDelete($this->getDBName());
-            } catch (OrientDBException $e) {
+            } catch (\Gratheon\OrientDB\OrientDBException $e) {
 
             }
         }
@@ -59,15 +60,15 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     public function testDBCreateOnNotConnectedDB()
     {
         $this->sequenceInc();
-        $this->setExpectedException('OrientDBWrongCommandException');
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
     }
 
     public function testDBCreateOnConnectedDB()
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
         $this->assertTrue($result);
         $result = $this->db->DBDelete($this->getDBName());
     }
@@ -75,16 +76,16 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     public function testDBCreateOnNotOpenDB()
     {
         $this->sequenceInc();
-        $this->setExpectedException('OrientDBWrongCommandException');
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
     }
 
     public function testDBCreateOnOpenDB()
     {
         $this->sequenceInc();
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongCommandException');
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
     }
 
     /**
@@ -94,10 +95,10 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
         $this->assertTrue($result);
         try {
-            $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+            $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
         }
         catch (OrientDBException $e) {
             $this->db->DBDelete($this->getDBName());
@@ -111,10 +112,10 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_LOCAL);
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         $this->assertTrue($result);
         try {
-            $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_LOCAL);
+            $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         }
         catch (OrientDBException $e) {
             $this->db->DBDelete($this->getDBName());
@@ -131,10 +132,10 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_LOCAL);
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         $this->assertTrue($result);
         try {
-            $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+            $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
         }
         catch (OrientDBException $e) {
             $this->db->DBDelete($this->getDBName());
@@ -151,10 +152,10 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
         $this->assertTrue($result);
         try {
-            $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_LOCAL);
+            $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         }
         catch (OrientDBException $e) {
             $this->db->DBDelete($this->getDBName());
@@ -176,7 +177,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
         $this->assertTrue($result);
         $this->db->DBDelete($this->getDBName());
     }
@@ -185,7 +186,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_LOCAL);
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         $this->assertTrue($result);
         $this->db->DBDelete($this->getDBName());
     }

@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 
 /**
  * OrientDBData() test in OrientDB tests
@@ -22,14 +22,14 @@ class OrientDBDataTest extends PHPUnit_Framework_TestCase
     public function  testConstructWithOrientDBRecord()
     {
         $record = $this->getMock('OrientDBRecord');
-        $data = new OrientDBData($record);
+        $data = new \Gratheon\OrientDB\OrientDBData($record);
         $this->assertInstanceOf('OrientDBData', $data);
     }
 
     public function  testConstructWithOther()
     {
         $this->setExpectedException('OrientDBException');
-        $data = new OrientDBData(true);
+        $data = new \Gratheon\OrientDB\OrientDBData(true);
     }
     // @TODO: add more unittests
 }

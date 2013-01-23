@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -25,7 +25,7 @@ class OrientDBDataclusterAddTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
         $this->clusterName = 'testdataclusteradd_' . rand(10, 99);
     }
 
@@ -36,21 +36,21 @@ class OrientDBDataclusterAddTest extends OrientDB_TestCase
 
     public function testDataclusterAddOnNotConnectedDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
-        $result = $this->db->dataclusterAdd('name', OrientDB::DATACLUSTER_TYPE_PHYSICAL);
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
+        $result = $this->db->dataclusterAdd('name', \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
     }
 
     public function testDataclusterAddOnConnectedDB()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongCommandException');
-        $result = $this->db->dataclusterAdd($this->clusterName, OrientDB::DATACLUSTER_TYPE_PHYSICAL);
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
+        $result = $this->db->dataclusterAdd($this->clusterName, \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
     }
 
     public function testDataclusterAddOnNotOpenDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
-        $result = $this->db->dataclusterAdd($this->clusterName, OrientDB::DATACLUSTER_TYPE_PHYSICAL);
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
+        $result = $this->db->dataclusterAdd($this->clusterName, \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
     }
 
     public function testDataclusterAddOnOpenDBAdmin()
@@ -61,10 +61,10 @@ class OrientDBDataclusterAddTest extends OrientDB_TestCase
                 $this->db->dataclusterRemove($cluster->id);
             }
         }
-        $result = $this->db->dataclusterAdd($this->clusterName, OrientDB::DATACLUSTER_TYPE_PHYSICAL);
+        $result = $this->db->dataclusterAdd($this->clusterName, \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
         $this->assertInternalType('integer', $result);
         $this->db->dataclusterRemove($result);
-        $result = $this->db->dataclusterAdd($this->clusterName, OrientDB::DATACLUSTER_TYPE_MEMORY);
+        $result = $this->db->dataclusterAdd($this->clusterName, \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_MEMORY);
         $this->assertInternalType('integer', $result);
         $this->db->dataclusterRemove($result);
         $this->assertInternalType('integer', $result);
@@ -74,7 +74,7 @@ class OrientDBDataclusterAddTest extends OrientDB_TestCase
     {
         $clusters = $this->db->DBOpen('demo', 'writer', 'writer');
         $this->setExpectedException('OrientDBException');
-        $result = $this->db->dataclusterAdd($this->clusterName, OrientDB::DATACLUSTER_TYPE_PHYSICAL);
+        $result = $this->db->dataclusterAdd($this->clusterName, \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
     }
 
     public function testDataclusterAddWithWrongParamCount()

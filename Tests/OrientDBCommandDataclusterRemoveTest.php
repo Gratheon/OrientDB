@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -25,7 +25,7 @@ class OrientDBDataclusterRemoveTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
         $this->clusterName = 'testdataclusterremove_' . rand(10, 99);
     }
 
@@ -36,20 +36,20 @@ class OrientDBDataclusterRemoveTest extends OrientDB_TestCase
 
     public function testDataclusterRemoveOnNotConnectedDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $result = $this->db->dataclusterRemove(10000);
     }
 
     public function testDataclusterRemoveOnConnectedDB()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $result = $this->db->dataclusterRemove(10000);
     }
 
     public function testDataclusterRemoveOnNotOpenDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $result = $this->db->dataclusterRemove();
     }
 
@@ -61,7 +61,7 @@ class OrientDBDataclusterRemoveTest extends OrientDB_TestCase
                 $this->db->dataclusterRemove($cluster->id);
             }
         }
-        $result = $this->db->dataclusterAdd($this->clusterName, OrientDB::DATACLUSTER_TYPE_PHYSICAL);
+        $result = $this->db->dataclusterAdd($this->clusterName, \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
         $this->assertInternalType('integer', $result);
         $result = $this->db->dataclusterRemove($result);
         $this->assertInternalType('boolean', $result);

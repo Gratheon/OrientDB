@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -23,7 +23,7 @@ class OrientDBClassBasicTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost');
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER);
     }
 
     protected function tearDown()
@@ -47,7 +47,7 @@ class OrientDBClassBasicTest extends OrientDB_TestCase
 
     public function testMethodNotImplemented()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $this->db->methodNotExist();
     }
 

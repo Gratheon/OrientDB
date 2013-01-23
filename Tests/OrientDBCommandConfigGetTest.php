@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -23,7 +23,7 @@ class OrientDBConfigGetTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
     }
 
     protected function tearDown()
@@ -33,7 +33,7 @@ class OrientDBConfigGetTest extends OrientDB_TestCase
 
     public function testConfigGetOnNotConnectedDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $value = $this->db->configGet('log.console.level');
     }
 
@@ -46,14 +46,14 @@ class OrientDBConfigGetTest extends OrientDB_TestCase
 
     public function testConfigGetOnNotOpenDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $value = $this->db->configGet('log.console.level');
     }
 
     public function testConfigGetOnOpenDB()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $value = $this->db->configGet('log.console.level');
     }
 

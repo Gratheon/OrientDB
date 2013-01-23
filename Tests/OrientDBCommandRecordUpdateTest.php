@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -29,7 +29,7 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
     }
 
     protected function tearDown()
@@ -39,20 +39,20 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
 
     public function testRecordUpdateOnNotConnectedDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->recordUpdate();
     }
 
     public function testRecordUpdateOnConnectedDB()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->recordUpdate();
     }
 
     public function testRecordUpdateOnNotOpenDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->recordUpdate();
     }
 
@@ -111,7 +111,7 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
         $content = 'value:"testrecord"';
         $recordPos = 0;
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $cluster_id = $this->db->dataclusterAdd($cluster_name, OrientDB::DATACLUSTER_TYPE_PHYSICAL);
+        $cluster_id = $this->db->dataclusterAdd($cluster_name, \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
         $this->assertInternalType('integer', $cluster_id);
         $pos = $this->db->recordCreate($cluster_id, $content);
         $this->assertSame(0, $pos);
@@ -137,9 +137,9 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
     public function testRecordUpdateWithSameType()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, OrientDB::RECORD_TYPE_BYTES);
+        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_BYTES);
         $this->assertInternalType('integer', $recordPos);
-        $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, -1, OrientDB::RECORD_TYPE_BYTES);
+        $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, -1, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_BYTES);
         $this->assertInternalType('integer', $version);
         $record2 = $this->db->recordLoad($this->clusterID . ':' . $recordPos, '');
         $this->AssertSame($version, $record2->version);
@@ -150,9 +150,9 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
     public function testRecordUpdateWithTypeBytes()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, OrientDB::RECORD_TYPE_DOCUMENT);
+        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_DOCUMENT);
         $this->assertInternalType('integer', $recordPos);
-        $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, -1, OrientDB::RECORD_TYPE_BYTES);
+        $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, -1, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_BYTES);
         $this->assertInternalType('integer', $version);
         $record2 = $this->db->recordLoad($this->clusterID . ':' . $recordPos, '');
         $this->AssertSame($version, $record2->version);
@@ -163,9 +163,9 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
     public function testRecordUpdateWithTypeDocument()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, OrientDB::RECORD_TYPE_DOCUMENT);
+        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_DOCUMENT);
         $this->assertInternalType('integer', $recordPos);
-        $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, -1, OrientDB::RECORD_TYPE_DOCUMENT);
+        $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, -1, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_DOCUMENT);
         $this->assertInternalType('integer', $version);
         $record2 = $this->db->recordLoad($this->clusterID . ':' . $recordPos, '');
         $this->AssertSame($version, $record2->version);
@@ -176,9 +176,9 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
     public function testRecordUpdateWithTypeFlat()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, OrientDB::RECORD_TYPE_DOCUMENT);
+        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_DOCUMENT);
         $this->assertInternalType('integer', $recordPos);
-        $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, -1, OrientDB::RECORD_TYPE_FLAT);
+        $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, -1, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_FLAT);
         $this->assertInternalType('integer', $version);
         $record2 = $this->db->recordLoad($this->clusterID . ':' . $recordPos, '');
         $this->AssertSame($version, $record2->version);
@@ -189,7 +189,7 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
     public function testRecordUpdateWithWrongType()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, OrientDB::RECORD_TYPE_DOCUMENT);
+        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_DOCUMENT);
         $this->assertInternalType('integer', $recordPos);
         $this->setExpectedException('OrientDBWrongParamsException');
         $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, 0, '!');
@@ -263,7 +263,7 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
         $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent);
         $this->assertInternalType('integer', $recordPos);
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->data->field = 'value';
         $this->assertNull($record->recordPos);
         $this->assertNull($record->clusterID);

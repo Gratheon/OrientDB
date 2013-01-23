@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 
 /**
  * OrientDBTypeLink() test in OrientDB tests
@@ -25,7 +25,7 @@ class OrientDBTypeLinkTest extends PHPUnit_Framework_TestCase
         $clusterID = 10;
         $recordPos = 0;
         $value = $clusterID . ':' . $recordPos;
-        $link = new OrientDBTypeLink('#' . $value);
+        $link = new \Gratheon\OrientDB\OrientDBTypeLink('#' . $value);
 
         $this->assertSame('#' . $value, (string) $link);
         $this->assertSame('#' . $value, $link->getHash());
@@ -39,7 +39,7 @@ class OrientDBTypeLinkTest extends PHPUnit_Framework_TestCase
         $clusterID = 10;
         $recordPos = 0;
         $value = $clusterID . ':' . $recordPos;
-        $link = new OrientDBTypeLink($value);
+        $link = new \Gratheon\OrientDB\OrientDBTypeLink($value);
 
         $this->assertSame('#' . $value, (string) $link);
         $this->assertSame('#' . $value, $link->getHash());
@@ -51,7 +51,7 @@ class OrientDBTypeLinkTest extends PHPUnit_Framework_TestCase
     public function testOrientDBTypeLinkValueInvalid()
     {
         $value = 10;
-        $link = new OrientDBTypeLink($value);
+        $link = new \Gratheon\OrientDB\OrientDBTypeLink($value);
 
         $this->assertSame('', (string) $link);
         $this->assertNull($link->get());
@@ -66,7 +66,7 @@ class OrientDBTypeLinkTest extends PHPUnit_Framework_TestCase
         $recordPos = 0;
         $value = $clusterID . ':' . $recordPos;
 
-        $link = new OrientDBTypeLink($clusterID, $recordPos);
+        $link = new \Gratheon\OrientDB\OrientDBTypeLink($clusterID, $recordPos);
 
         $this->assertSame('#' . $value, (string) $link);
         $this->assertSame('#' . $value, $link->getHash());
@@ -80,7 +80,7 @@ class OrientDBTypeLinkTest extends PHPUnit_Framework_TestCase
         $clusterID = 'one';
         $recordPos = 0;
 
-        $link = new OrientDBTypeLink($clusterID, $recordPos);
+        $link = new \Gratheon\OrientDB\OrientDBTypeLink($clusterID, $recordPos);
 
         $this->assertSame('', (string) $link);
         $this->assertSame('#', $link->getHash());
@@ -94,7 +94,7 @@ class OrientDBTypeLinkTest extends PHPUnit_Framework_TestCase
         $clusterID = 101;
         $recordPos = '';
 
-        $link = new OrientDBTypeLink($clusterID, $recordPos);
+        $link = new \Gratheon\OrientDB\OrientDBTypeLink($clusterID, $recordPos);
 
         $this->assertSame('', (string) $link);
         $this->assertSame('#', $link->getHash());
@@ -113,7 +113,7 @@ class OrientDBTypeLinkTest extends PHPUnit_Framework_TestCase
         }
         $value = $clusterID . ':' . $recordPos;
 
-        $link = new OrientDBTypeLink($clusterID, $recordPos);
+        $link = new \Gratheon\OrientDB\OrientDBTypeLink($clusterID, $recordPos);
 
         $this->assertSame('#' . $value, (string) $link);
         $this->assertSame('#' . $value, $link->getHash());
@@ -128,7 +128,7 @@ class OrientDBTypeLinkTest extends PHPUnit_Framework_TestCase
         $recordPos = '9223372036854775807 ';
         $value = $clusterID . ':' . $recordPos;
 
-        $link = new OrientDBTypeLink($clusterID, $recordPos);
+        $link = new \Gratheon\OrientDB\OrientDBTypeLink($clusterID, $recordPos);
 
         $this->assertSame('', (string) $link);
         $this->assertSame('#', $link->getHash());

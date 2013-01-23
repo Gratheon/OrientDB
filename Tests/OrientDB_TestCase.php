@@ -22,7 +22,7 @@ abstract class OrientDB_TestCase extends PHPUnit_Framework_TestCase
      * config/orientdb-server-config.xml in your OrientDB installation
      * @var string
      */
-    protected $root_password = '60F3D52B4374C22B19F2EA5AD2812A45FB1C34985C2532D60E267AADB9E3E130';
+    protected $root_password = ORIENTDB_ROOTPASSWORD;
 
     /**
      * Instance of OrientDB-PHP

@@ -104,7 +104,7 @@ For difference see official [OrientDB docs](http://code.google.com/p/orient/wiki
 
 *Example:*
 
-    $isCreated = $db->DBCreate('mydb', OrientDB::DB_TYPE_LOCAL);
+    $isCreated = $db->DBCreate('mydb', \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
 
 #### DBDelete ####
 Delete database with name provided. Always return `true`.
@@ -254,7 +254,7 @@ Default type used is `OrientDB::RECORD_TYPE_DOCUMENT`.
 *Examples 1:*
 
     $version = $db->recordUpdate('1:1', 'Name:"Bob"');
-    $version = $db->recordUpdate('1:1', 'Name:"Sam"', 1, OrientDB::RECORD_TYPE_DOCUMENT);
+    $version = $db->recordUpdate('1:1', 'Name:"Sam"', 1, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_DOCUMENT);
 
 You can, however, use instance of class OrientDBRecord to update record in OrientDB server. If so, some of this instance properties (`clusterID`, `recordPos`, `recordID`, `version`) will be filled with correct values. See example below:
 
@@ -332,7 +332,7 @@ Cluster types available are:
 
 *Example:*
 
-    $clusterID = $db->dataclusterAdd('testcluster', OrientDB::DATACLUSTER_TYPE_PHYSICAL);
+    $clusterID = $db->dataclusterAdd('testcluster', \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
 
 #### dataclusterRemove ####
 Removes datacluster by its ID. Returns `true` on success or throws an exception.
@@ -404,16 +404,16 @@ Default fetchplan is `*:0`.
 
 *Examples:*
 
-    $records = $db->command(OrientDB::COMMAND_SELECT_ASYNC, 'select * from city limit 7');
-    $records = $db->command(OrientDB::COMMAND_SELECT_ASYNC, 'select from city traverse( any() )', '*:-1');
-    $false = $db->command(OrientDB::COMMAND_SELECT_SYNC, 'select from 11:4 where any() traverse(0,10) (address.city = "Rome")');
-    $links = $db->command(OrientDB::COMMAND_QUERY, 'find references 14:1');
-    $record = $db->command(OrientDB::COMMAND_QUERY, 'insert into city (name, country) values ("Potenza", #14:1)');
-    $updatedCount = $db->command(OrientDB::COMMAND_QUERY, 'update city set name = "Taranto" where name = "Potenza"');
-    $deletedCount = $this->db->command(OrientDB::COMMAND_QUERY, 'delete from city where name = "Taranto"');
+    $records = $db->command(\Gratheon\OrientDB\OrientDB::COMMAND_SELECT_ASYNC, 'select * from city limit 7');
+    $records = $db->command(\Gratheon\OrientDB\OrientDB::COMMAND_SELECT_ASYNC, 'select from city traverse( any() )', '*:-1');
+    $false = $db->command(\Gratheon\OrientDB\OrientDB::COMMAND_SELECT_SYNC, 'select from 11:4 where any() traverse(0,10) (address.city = "Rome")');
+    $links = $db->command(\Gratheon\OrientDB\OrientDB::COMMAND_QUERY, 'find references 14:1');
+    $record = $db->command(\Gratheon\OrientDB\OrientDB::COMMAND_QUERY, 'insert into city (name, country) values ("Potenza", #14:1)');
+    $updatedCount = $db->command(\Gratheon\OrientDB\OrientDB::COMMAND_QUERY, 'update city set name = "Taranto" where name = "Potenza"');
+    $deletedCount = $this->db->command(\Gratheon\OrientDB\OrientDB::COMMAND_QUERY, 'delete from city where name = "Taranto"');
 
 ### select ###
-Is an alias for command(OrientDB::COMMAND_SELECT_SYNC, string $query).
+Is an alias for command(\Gratheon\OrientDB\OrientDB::COMMAND_SELECT_SYNC, string $query).
 
     mixed $db->select(string $query);
 
@@ -422,7 +422,7 @@ Is an alias for command(OrientDB::COMMAND_SELECT_SYNC, string $query).
     $records = $db->select('select from city traverse( any() )');
 
 ### selectAsync ###
-Is an alias for command(OrientDB::COMMAND_SELECT_ASYNC, string $query[, string $fetchplan]).
+Is an alias for command(\Gratheon\OrientDB\OrientDB::COMMAND_SELECT_ASYNC, string $query[, string $fetchplan]).
 
     mixed $db->selectAsync(string $query[, string $fetchplan]);
 
@@ -431,7 +431,7 @@ Is an alias for command(OrientDB::COMMAND_SELECT_ASYNC, string $query[, string $
     $records = $db->selectAsync('select * from city limit 7', '*:-1');
 
 ### query ###
-Is an alias for command(OrientDB::COMMAND_QUERY, string $query).
+Is an alias for command(\Gratheon\OrientDB\OrientDB::COMMAND_QUERY, string $query).
 
     mixed $db->query(string $query);
 

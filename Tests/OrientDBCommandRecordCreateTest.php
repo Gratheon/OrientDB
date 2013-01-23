@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -27,7 +27,7 @@ class OrientDBRecordCreateTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
     }
 
     protected function tearDown()
@@ -37,20 +37,20 @@ class OrientDBRecordCreateTest extends OrientDB_TestCase
 
     public function testRecordCreateOnNotConnectedDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->recordCreate();
     }
 
     public function testRecordCreateOnConnectedDB()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->recordCreate();
     }
 
     public function testRecordCreateOnNotOpenDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->recordCreate();
     }
 
@@ -79,7 +79,7 @@ class OrientDBRecordCreateTest extends OrientDB_TestCase
     public function testRecordCreateWithTypeBytes()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, OrientDB::RECORD_TYPE_BYTES);
+        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_BYTES);
         $this->assertInternalType('integer', $recordPos);
         $this->db->recordDelete($this->clusterID . ':' . $recordPos);
     }
@@ -87,7 +87,7 @@ class OrientDBRecordCreateTest extends OrientDB_TestCase
     public function testRecordCreateWithTypeDocument()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, OrientDB::RECORD_TYPE_DOCUMENT);
+        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_DOCUMENT);
         $this->assertInternalType('integer', $recordPos);
         $this->db->recordDelete($this->clusterID . ':' . $recordPos);
     }
@@ -95,7 +95,7 @@ class OrientDBRecordCreateTest extends OrientDB_TestCase
     public function testRecordCreateWithTypeFlat()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, OrientDB::RECORD_TYPE_FLAT);
+        $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_FLAT);
         $this->assertInternalType('integer', $recordPos);
         $this->db->recordDelete($this->clusterID . ':' . $recordPos);
     }
@@ -110,7 +110,7 @@ class OrientDBRecordCreateTest extends OrientDB_TestCase
     public function testRecordCreateWithOrientDBRecordType()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->data->field = 'value';
         $this->assertNull($record->recordPos);
         $this->assertNull($record->clusterID);

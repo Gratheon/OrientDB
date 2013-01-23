@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 
 /**
  * OrientDBRecord() test in OrientDB tests
@@ -25,7 +25,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $clusterID = 1;
         $recordPos = 2;
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $this->assertNull($record->recordID);
         $record->clusterID = $clusterID;
         $record->recordPos = $recordPos;
@@ -37,15 +37,15 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $clusterID = 1;
         $recordPos = 2;
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $this->assertNull($record->recordID);
         $this->assertNull($record->recordID);
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->clusterID = $clusterID;
         $this->assertNull($record->recordID);
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->recordPos = $recordPos;
         $this->assertNull($record->recordID);
     }
@@ -55,12 +55,12 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $clusterID = 3;
         $recordPos = 4;
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->clusterID = $clusterID;
         $record->recordPos = 0;
         $this->assertSame($clusterID . ':' . 0, $record->recordID);
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->clusterID = 0;
         $record->recordPos = $recordPos;
         $this->assertSame(0 . ':' . $recordPos, $record->recordID);
@@ -71,7 +71,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $clusterID = 3;
         $recordPos = '9223372036854775807';
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->clusterID = $clusterID;
         $record->recordPos = $recordPos;
         $record->parse();
@@ -86,7 +86,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $clusterID = 3;
         $recordPos = '-1';
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->clusterID = $clusterID;
         $record->recordPos = $recordPos;
         $record->parse();
@@ -101,7 +101,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $clusterID = 3;
         $recordPos = '9223372036854775807 ';
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->clusterID = $clusterID;
         $record->recordPos = $recordPos;
         $record->parse();
@@ -114,7 +114,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentSimpleString()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $key = 'name';
         $value = 'Василий';
         $record->content = $key . ':"' . $value . '"';
@@ -125,7 +125,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentTwoStrings()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $keys = array(
             'FirstName',
             'LastName');
@@ -147,7 +147,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentStringsWithEscape()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'FirstName:"Василий\\\\",LastName:"Иванов\""';
 
         $this->assertSame("Василий\\", $record->data->FirstName);
@@ -158,7 +158,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentWithBoolean()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'False:false,LastName:"Smith",true:true';
 
         $this->assertFalse($record->data->False);
@@ -170,7 +170,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentCity()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'City@name:"Rome",country:#14:0';
 
         $this->assertSame('City', $record->className);
@@ -183,7 +183,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentCollection()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'people:["Alice","Bob","Eva"]';
 
         $this->assertInternalType('array', $record->data->people);
@@ -197,7 +197,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentComplex()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'Profile@nick:"ThePresident",follows:[],followers:[#10:5,#10:6],name:"Barack",surname:"Obama",location:#3:2,invitedBy:,salary_cloned:,salary:120.3f';
 
         $this->assertSame('Profile', $record->className);
@@ -223,7 +223,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentMap()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'ORole@name:"reader",inheritedRole:,mode:0,rules:{"database":2,"database.cluster.internal":2,"database.cluster.orole":2,"database.cluster.ouser":2,"database.class.*":2,"database.cluster.*":2,"database.query":2,"database.command":2,"database.hook.record":2}';
 
         $this->assertSame('ORole', $record->className);
@@ -246,7 +246,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentEmptyLink()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'name:"Rome",country:#14:0,district:#,sea:#';
 
         $this->assertSame('Rome', $record->data->name);
@@ -262,7 +262,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentNumberFormats()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'integer:123,byte:112b,short:30s,long:2147483648l,float:999.999f,double:456.7654d,decimal:12.34c';
 
         $this->assertSame(123, $record->data->integer);
@@ -275,7 +275,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentNumberFormatsNegative()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'integer:-123,byte:-112b,short:-30s,long:-2147483648l,float:-999.999f,double:-456.7654d,decimal:12.34c';
 
         $this->assertSame(-123, $record->data->integer);
@@ -288,7 +288,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentNumberFormatFormats()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'one:1.0E2f,two:-1.0E2f,three:9.8E-4f,four:1.0e2f,five:1.13e10f';
 
         $this->assertSame(1.0E2, $record->data->one);
@@ -300,7 +300,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentDate()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'filename:"readme.markdown",permissions:"0644",user:"nobody",group:"nobody",size:11958,modified:1302627138t';
 
         $this->assertSame('readme.markdown', $record->data->filename);
@@ -315,7 +315,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordContentMapWithNull()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'rules:{"database":,"database.cluster.internal":,"database.cluster.orole":}';
 
         $this->assertInternalType('array', $record->data->rules);
@@ -328,7 +328,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordEmbeddedDoc()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'City@name:"Rome",country:#14:0,embedded:(City@name:"Rome",country:#14:0)';
 
         $this->assertSame('City', $record->className);
@@ -346,7 +346,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordEmbeddedDocsInCollection()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'values:[(name:"John"),(City:"New York"),(color:"#FFF")]';
 
         $this->assertInternalType('array', $record->data->values);
@@ -364,7 +364,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testCreateRecord()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->data->FirstName = 'Bruce';
         $record->data->LastName = 'Wayne';
         $record->data->appearance = 1939;
@@ -374,7 +374,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testOversizedRecord()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'False:false,LastName:"Smith",true:true     ';
 
         $this->assertFalse($record->data->False);
@@ -387,7 +387,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $clusterID = 9;
         $recordPos = 8;
         $version = 7;
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
 
         $this->assertNull($record->clusterID);
         $this->assertNull($record->recordPos);
@@ -434,21 +434,21 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testSetRecordID()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $this->setExpectedException('PHPUnit_Framework_Error_Notice');
         $record->recordID = '#1:1';
     }
 
     public function testSetUnknownProperty()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $this->setExpectedException('PHPUnit_Framework_Error_Notice');
         $record->unknown = true;
     }
 
     public function testGetUnknownProperty()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $this->setExpectedException('PHPUnit_Framework_Error_Notice');
         $var = $record->unknown;
     }
@@ -460,7 +460,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
      */
     public function testParseRecordContentWithSingleQuote()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'automatic:true,ignoreChars:" ' . chr(0x0d) . chr(0x0a) . chr(0x09) . ':;,.|+*/\\\\=!?[]()\'\"",type:"FULLTEXT"';
 
         $this->assertSame(true, $record->data->automatic);
@@ -474,7 +474,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateRecordWithSingleQuote()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->data->field = "'";
 
         $this->assertSame("'", $record->data->field);
@@ -484,7 +484,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
     public function testParseRecordWithNumbersInFieldName()
     {
         $fieldName = 'FieldName_With-CharsAndNumbers56';
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = $fieldName . ':1';
 
         $this->assertNotEmpty($record->data->$fieldName);
@@ -492,7 +492,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testParseRecordWithInvalidBoolean()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'test:"test",fieldname:[fa]';
         $this->setExpectedException('OrientDBDeSerializeException');
         $record->parse();
@@ -500,7 +500,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testRecordCountable()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'field1:1,field2:2';
 
         $this->assertSame(1, $record->data->field1);
@@ -510,7 +510,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testRecordIterator()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'field1:1,field2:2';
 
         $fieldsAvailable = 0;
@@ -522,7 +522,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testRecordNoKey()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
 
         $this->setExpectedException('PHPUnit_Framework_Error_Notice', 'Undefined index: noSuchKey');
         $value = $record->data->noSuchKey;
@@ -530,7 +530,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testRecordDataIsSet()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
 
         $this->assertFalse(isset($record->data->field));
 
@@ -541,7 +541,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testRecordDataUnset()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = 'field:"value"';
         $this->assertTrue(isset($record->data->field));
         $this->assertSame($record->data->getKeys(), array('field'));
@@ -553,7 +553,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
     public function testParseRecordForced()
     {
         $content = 'ClassName@field:"text",link:#,bool:false';
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = $content;
 
         $this->assertSame('ClassName', $record->className);
@@ -563,7 +563,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $this->assertSame($content, (string) $record);
         $this->assertSame($record->data->getKeys(), array('field', 'link', 'bool'));
 
-        $recordForced = new OrientDBRecord();
+        $recordForced = new \Gratheon\OrientDB\OrientDBRecord();
         $recordForced->content = $content;
         $recordForced->parse();
         $this->assertSame('ClassName', $recordForced->className);
@@ -576,7 +576,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
 
     public function testRecordisParsedFlag()
     {
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $flag = new ReflectionProperty('OrientDBRecord', 'isParsed');
         $flag->setAccessible(true);
         $record->content = 'field:"value"';
@@ -594,7 +594,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
     public function testRecordGetClassName()
     {
         $class_name = 'testclass';
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->className = $class_name;
         $this->assertSame($class_name, $record->className);
     }
@@ -603,7 +603,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
     {
         $content = 'NewClass@name:"Value"';
         $class_name = 'OldClass';
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->className = $class_name;
         $this->assertSame('OldClass', $record->className);
         $record->content = $content;
@@ -618,7 +618,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $record_pos = 2;
         $version = 3;
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->className = $class_name;
         $record->data->Field = true;
         $record->clusterID = $cluster_id;
@@ -651,7 +651,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $record_pos = 2;
         $version = 3;
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $content = $class_name . '@Key:"Value"';
         $record->content = $content;
         $record->clusterID = $cluster_id;
@@ -682,7 +682,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $record_pos = 2;
         $version = 3;
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->className = $class_name;
         $record->data->Field = true;
         $record->clusterID = $cluster_id;
@@ -715,7 +715,7 @@ class OrientDBRecordTest extends PHPUnit_Framework_TestCase
         $record_pos = 2;
         $version = 3;
 
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $content = $class_name . '@Key:"Value"';
         $record->content = $content;
         $record->clusterID = $cluster_id;

@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -27,7 +27,7 @@ class OrientDBRecordDeleteTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
     }
 
     protected function tearDown()
@@ -37,20 +37,20 @@ class OrientDBRecordDeleteTest extends OrientDB_TestCase
 
     public function testRecordDeleteOnNotConnectedDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->recordDelete();
     }
 
     public function testRecordDeleteOnConnectedDB()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->recordDelete();
     }
 
     public function testRecordDeleteOnNotOpenDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->recordDelete();
     }
 
@@ -107,10 +107,10 @@ class OrientDBRecordDeleteTest extends OrientDB_TestCase
         if ($this->db->DBExists($dbName)) {
             $this->db->DBDelete($dbName);
         }
-        $result = $this->db->DBCreate($dbName, OrientDB::DB_TYPE_LOCAL);
+        $result = $this->db->DBCreate($dbName, \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         $this->assertTrue($result);
         $this->db->DBOpen($dbName, 'admin', 'admin');
-        $clusterID = $this->db->dataclusterAdd($clusterName, OrientDB::DATACLUSTER_TYPE_PHYSICAL);
+        $clusterID = $this->db->dataclusterAdd($clusterName, \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
         $this->assertInternalType('integer', $clusterID);
         $recordPos = $this->db->recordCreate($clusterID, $recordContent);
         $this->AssertSame(0, $recordPos);
@@ -141,7 +141,7 @@ class OrientDBRecordDeleteTest extends OrientDB_TestCase
     public function testRecordDeleteWithCorrectVersion()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $record = new OrientDBRecord();
+        $record = new \Gratheon\OrientDB\OrientDBRecord();
         $record->content = $this->recordContent;
         $recordPos = $this->db->recordCreate($this->clusterID, $record);
         $this->assertInternalType('integer', $recordPos);

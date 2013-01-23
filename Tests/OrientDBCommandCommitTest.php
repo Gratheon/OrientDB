@@ -8,7 +8,6 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -23,7 +22,7 @@ class OrientDBCommitTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
     }
 
     protected function tearDown()
@@ -33,20 +32,20 @@ class OrientDBCommitTest extends OrientDB_TestCase
 
     public function testCommitOnNotConnectedDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->commit();
     }
 
     public function testCommitOnConnectedDB()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->commit();
     }
 
     public function testCommitOnNotOpenDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $list = $this->db->commit();
     }
 

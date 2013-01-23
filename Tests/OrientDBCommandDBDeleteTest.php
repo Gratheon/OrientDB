@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -27,7 +27,7 @@ class OrientDBDBDeleteTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
     }
 
     protected function tearDown()
@@ -48,7 +48,7 @@ class OrientDBDBDeleteTest extends OrientDB_TestCase
     public function testDBCreateOnNotConnectedDB()
     {
         $this->sequenceInc();
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $result = $this->db->DBDelete($this->getDBName());
     }
 
@@ -56,7 +56,7 @@ class OrientDBDBDeleteTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $result = $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_LOCAL);
+        $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         $this->assertTrue($result);
         $result = $this->db->DBDelete($this->getDBName());
         $this->assertTrue($result);
@@ -65,7 +65,7 @@ class OrientDBDBDeleteTest extends OrientDB_TestCase
     public function testDBDeleteOnNotOpenDB()
     {
         $this->sequenceInc();
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $result = $this->db->DBDelete($this->getDBName());
     }
 
@@ -73,7 +73,7 @@ class OrientDBDBDeleteTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $result = $this->db->DBDelete($this->getDBName());
     }
 
@@ -81,7 +81,7 @@ class OrientDBDBDeleteTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_MEMORY);
+        $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
         $result = $this->db->DBDelete($this->getDBName());
         $this->assertTrue($result);
     }
@@ -90,7 +90,7 @@ class OrientDBDBDeleteTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $this->db->DBCreate($this->getDBName(), OrientDB::DB_TYPE_LOCAL);
+        $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         $result = $this->db->DBDelete($this->getDBName());
         $this->assertTrue($result);
     }

@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 
 /**
  * OrientDBTypeDate() test in OrientDB tests
@@ -23,7 +23,7 @@ class OrientDBTypeDateTest extends PHPUnit_Framework_TestCase
     public function testOrientDBTypeDateValueWithT()
     {
         $value = time();
-        $date = new OrientDBTypeDate($value . 't');
+        $date = new \Gratheon\OrientDB\OrientDBTypeDate($value . 't');
 
         $this->assertSame($value . 't', (string) $date);
         $this->assertSame($value . 't', $date->getValue());
@@ -33,7 +33,7 @@ class OrientDBTypeDateTest extends PHPUnit_Framework_TestCase
     public function testOrientDBTypeDateValueWithoutT()
     {
         $value = time();
-        $date = new OrientDBTypeDate($value);
+        $date = new \Gratheon\OrientDB\OrientDBTypeDate($value);
 
         $this->assertSame($value . 't', (string) $date);
         $this->assertSame($value . 't', $date->getValue());
@@ -43,7 +43,7 @@ class OrientDBTypeDateTest extends PHPUnit_Framework_TestCase
     public function testOrientDBTypeDateValueInvalid()
     {
         $value = '';
-        $date = new OrientDBTypeDate($value);
+        $date = new \Gratheon\OrientDB\OrientDBTypeDate($value);
 
         $this->assertSame('', (string) $date);
         $this->assertNull($date->getValue());

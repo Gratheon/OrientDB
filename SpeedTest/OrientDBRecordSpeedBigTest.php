@@ -8,8 +8,6 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
-
 /**
  * OrientDBRecord() test in OrientDB tests
  *
@@ -36,7 +34,7 @@ class OrientDBRecordSpeedBigTest extends PHPUnit_Framework_TestCase
                 $pos = rand(0, strlen($text));
                 $temp = substr($temp, 0, $pos) . '"' . substr($temp, $pos + 1);
             }
-            $content[] = 'text_' . $i . ':' . OrientDBRecordEncoder::encodeString($temp);
+            $content[] = 'text_' . $i . ':' . \Gratheon\OrientDB\OrientDBRecordEncoder::encodeString($temp);
         }
         // Prepare some booleans
         for ($i = 0; $i < $fieldsCnt; $i++) {
@@ -60,7 +58,7 @@ class OrientDBRecordSpeedBigTest extends PHPUnit_Framework_TestCase
         var_dump(strlen($content));
         $timeStart = microtime(true);
         for ($i = 0; $i < $runs; $i++) {
-            $record = new OrientDBRecord();
+            $record = new \Gratheon\OrientDB\OrientDBRecord();
             $record->content = $content;
             $record->parse();
         }

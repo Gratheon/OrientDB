@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 
 /**
  * Socket test in OrientDB tests
@@ -23,12 +23,12 @@ class OrientDBConnectTest extends PHPUnit_Framework_TestCase
     public function testNewFailedConnection()
     {
         $this->setExpectedException('OrientDBConnectException');
-        $db = new OrientDB('localhost', 2000);
+        $db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2000);
     }
 
     public function testNewSucsessfullConnection()
     {
-        $db = new OrientDB('localhost', 2424);
+        $db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
         $this->assertInstanceOf('OrientDB', $db);
     }
 }

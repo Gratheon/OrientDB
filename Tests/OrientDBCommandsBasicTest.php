@@ -8,7 +8,7 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB/OrientDB.php';
+require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -23,7 +23,7 @@ class OrientDBCommandsBasicTest extends OrientDB_TestCase
 
     protected function setUp()
     {
-        $this->db = new OrientDB('localhost', 2424);
+        $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
     }
 
     protected function tearDown()
@@ -117,20 +117,20 @@ class OrientDBCommandsBasicTest extends OrientDB_TestCase
 
     public function testCloseDBOnNotConnectedDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $this->db->DBClose();
     }
 
     public function testCloseDBOnNotOpenedDB()
     {
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $this->db->DBClose();
     }
 
     public function testCloseDBOnConnectedDB()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $this->db->DBClose();
     }
 
@@ -147,7 +147,7 @@ class OrientDBCommandsBasicTest extends OrientDB_TestCase
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
         $this->db->DBClose();
-        $this->setExpectedException('OrientDBWrongCommandException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongCommandException');
         $this->db->DBOpen('demo', 'writer', 'writer');
     }
 
@@ -159,7 +159,7 @@ class OrientDBCommandsBasicTest extends OrientDB_TestCase
             while ($i < $tries) {
                 $clusters = $this->db->DBOpen('demo', 'admin', 'admin');
                 $i++;
-                $this->db = new OrientDB('localhost', 2424);
+                $this->db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
             }
         }
         catch (OrientDBException $e) {

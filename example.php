@@ -51,7 +51,7 @@ if ($exists) {
 echo 'Creating DB...' . PHP_EOL;
 
 try {
-    $result = $db->DBCreate($dbName, OrientDB::DB_TYPE_LOCAL);
+    $result = $db->DBCreate($dbName, \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
 
     echo 'Opening DB...' . PHP_EOL;
     $clusters = $db->DBOpen($dbName, 'writer', 'writer');
