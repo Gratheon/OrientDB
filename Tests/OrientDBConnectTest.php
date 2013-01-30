@@ -22,14 +22,14 @@ class OrientDBConnectTest extends PHPUnit_Framework_TestCase
 
     public function testNewFailedConnection()
     {
-        $this->setExpectedException('OrientDBConnectException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBConnectException');
         $db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2000);
     }
 
     public function testNewSucsessfullConnection()
     {
         $db = new \Gratheon\OrientDB\OrientDB(ORIENTDB_SERVER, 2424);
-        $this->assertInstanceOf('OrientDB', $db);
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDB', $db);
     }
 }
 

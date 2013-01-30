@@ -73,21 +73,21 @@ class OrientDBDataclusterAddTest extends OrientDB_TestCase
     public function testDataclusterAddOnOpenDBWriter()
     {
         $clusters = $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $result = $this->db->dataclusterAdd($this->clusterName, \Gratheon\OrientDB\OrientDB::DATACLUSTER_TYPE_PHYSICAL);
     }
 
     public function testDataclusterAddWithWrongParamCount()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->dataclusterAdd('name');
     }
 
     public function testDataclusterAddWithWrongParamType()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->dataclusterAdd('name', 'INVALID');
     }
 }

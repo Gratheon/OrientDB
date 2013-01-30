@@ -60,14 +60,14 @@ class OrientDBShutdownTest extends OrientDB_TestCase
     public function testshutdownWithWrongPermissions()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $value = $this->db->shutdown('root', '');
     }
 
     public function testshutdownWithWrongOptionCount()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $value = $this->db->shutdown();
     }
 }

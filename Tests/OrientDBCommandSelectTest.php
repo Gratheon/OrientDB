@@ -55,13 +55,13 @@ class OrientDBSelectTest extends OrientDB_TestCase
         $this->db->DBOpen('demo', 'writer', 'writer');
         $records = $this->db->select('select * from city limit 7');
         $this->assertInternalType('array', $records);
-        $this->assertInstanceOf('OrientDBRecord', array_pop($records));
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', array_pop($records));
     }
 
     public function testSelectWithWrongOptionCount()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $record = $this->db->select();
     }
 
@@ -69,7 +69,7 @@ class OrientDBSelectTest extends OrientDB_TestCase
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
         $this->assertEmpty($this->db->cachedRecords);
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $records = $this->db->select('select from city limit 1', '*:1');
     }
 

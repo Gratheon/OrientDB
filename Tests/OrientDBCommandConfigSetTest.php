@@ -67,21 +67,21 @@ class OrientDBConfigSetTest extends OrientDB_TestCase
     public function testConfigSetWithWrongOptionCount()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->configSet();
     }
 
     public function testConfigSetWithNoValue()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->configSet('log.console.level');
     }
 
     public function testConfigSetWithWrongValue()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $result = $this->db->configSet('log.console.level', 'WRONGVALUE');
     }
 

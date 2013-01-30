@@ -11,7 +11,7 @@
 require_once 'OrientDB.php';
 
 /**
- * OrientDBCommandAbstract::I64() test in OrientDB tests
+ * \Gratheon\OrientDB\Command\OrientDBCommandAbstract::I64() test in OrientDB tests
  *
  * @author Anton Terekhov <anton@netmonsters.ru>
  * @package OrientDB-PHP
@@ -26,7 +26,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0x00000000;
         $low = 0x00000000;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64One()
@@ -35,7 +35,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0x00000000;
         $low = 0x00000001;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64NegativeOne()
@@ -44,7 +44,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0xFFFFFFFF;
         $low = 0xFFFFFFFF;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64NegativeTwo()
@@ -53,7 +53,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0xFFFFFFFF;
         $low = 0xFFFFFFFE;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64AboveNegative32Bound()
@@ -62,7 +62,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0xFFFFFFFF;
         $low = 0x80000001;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64Negative32Bound()
@@ -71,7 +71,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0xFFFFFFFF;
         $low = 0x80000000;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64BelowNegative32Bound()
@@ -84,7 +84,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0xFFFFFFFF;
         $low = 0x7FFFFFFF;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64AbovePositive32Bound()
@@ -93,7 +93,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0x00000000;
         $low = 0x80000000;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64Positive32Bound()
@@ -102,7 +102,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0x00000000;
         $low = 0x7FFFFFFF;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64BelowPositive32Bound()
@@ -111,7 +111,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0x00000000;
         $low = 0x7FFFFFFE;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64NegativeBound()
@@ -125,7 +125,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0x80000000;
         $low = 0x00000000;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64AboveNegativeBound()
@@ -139,7 +139,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0x80000000;
         $low = 0x00000001;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64PositiveBound()
@@ -153,7 +153,7 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0x7FFFFFFF;
         $low = 0xFFFFFFFF;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 
     public function testUnpackI64BelowPositiveBound()
@@ -167,6 +167,6 @@ class OrientDBI64Test extends PHPUnit_Framework_TestCase
         $hi = 0x7FFFFFFF;
         $low = 0xFFFFFFFE;
 
-        $this->assertSame($result, OrientDBCommandAbstract::unpackI64($hi, $low));
+        $this->assertSame($result, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::unpackI64($hi, $low));
     }
 }

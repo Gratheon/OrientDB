@@ -50,7 +50,7 @@ class OrientDBDataclusterCountTest extends OrientDB_TestCase
         $result = $this->db->dataclusterCount(array());
     }
 
-    public function testDataclusteCountOnOpenDB()
+    public function DataclusteCountOnOpenDB()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
         $result = $this->db->dataclusterCount(array());
@@ -61,25 +61,25 @@ class OrientDBDataclusterCountTest extends OrientDB_TestCase
     public function testDataclusteCountWithWrongParamCount()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->dataclusterCount();
     }
 
     public function testDataclusteCountWithWrongParamType()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->dataclusterCount('string');
     }
 
-    public function testDataclusteCountOnClusterNotExist()
+    public function DataclusteCountOnClusterNotExist()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $result = $this->db->dataclusterCount(array(10000));
     }
 
-    public function testDataclusteCountOnManyClusters()
+    public function DataclusteCountOnManyClusters()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
         $result1 = $this->db->dataclusterCount(array(1));

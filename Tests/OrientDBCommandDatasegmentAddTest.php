@@ -53,7 +53,7 @@ class OrientDBDatasegmentAddTest extends OrientDB_TestCase
     public function testDatasegmentAddOnOpenDB()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException', 'Not implemented');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException', 'Not implemented');
         $recordPos = $this->db->datasegmentAdd('', '');
     }
 

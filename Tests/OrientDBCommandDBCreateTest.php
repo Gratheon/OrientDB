@@ -100,7 +100,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
         try {
             $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
         }
-        catch (OrientDBException $e) {
+        catch (\Gratheon\OrientDB\OrientDBException $e) {
             $this->db->DBDelete($this->getDBName());
             return;
         }
@@ -117,7 +117,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
         try {
             $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         }
-        catch (OrientDBException $e) {
+        catch (\Gratheon\OrientDB\OrientDBException $e) {
             $this->db->DBDelete($this->getDBName());
             return;
         }
@@ -137,7 +137,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
         try {
             $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_MEMORY);
         }
-        catch (OrientDBException $e) {
+        catch (\Gratheon\OrientDB\OrientDBException $e) {
             $this->db->DBDelete($this->getDBName());
             return;
         }
@@ -157,7 +157,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
         try {
             $result = $this->db->DBCreate($this->getDBName(), \Gratheon\OrientDB\OrientDB::DB_TYPE_LOCAL);
         }
-        catch (OrientDBException $e) {
+        catch (\Gratheon\OrientDB\OrientDBException $e) {
             $this->db->DBDelete($this->getDBName());
             return;
         }
@@ -169,7 +169,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->DBCreate($this->getDBName());
     }
 
@@ -195,7 +195,7 @@ class OrientDBDBCreateTest extends OrientDB_TestCase
     {
         $this->sequenceInc();
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->DBCreate($this->getDBName(), 'INCORRECT');
     }
 }

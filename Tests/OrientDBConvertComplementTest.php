@@ -11,7 +11,7 @@
 require_once 'OrientDB.php';
 
 /**
- * OrientDBCommandAbstract::convertComplement() test in OrientDB tests
+ * \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplement() test in OrientDB tests
  *
  * @author Anton Terekhov <anton@netmonsters.ru>
  * @package OrientDB-PHP
@@ -24,21 +24,21 @@ class OrientDBConvertComplementTest extends PHPUnit_Framework_TestCase
     {
         $int = (int) -2147483648;
 
-        $this->assertSame($int, OrientDBCommandAbstract::convertComplementInt($int));
+        $this->assertSame($int, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementInt($int));
     }
 
     public function testConvertComplementIntx32PositiveBound()
     {
         $int = (int) 2147483647;
 
-        $this->assertSame($int, OrientDBCommandAbstract::convertComplementInt($int));
+        $this->assertSame($int, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementInt($int));
     }
 
     public function testConvertComplementIntZero()
     {
         $int = (int) 0;
 
-        $this->assertSame($int, OrientDBCommandAbstract::convertComplementInt($int));
+        $this->assertSame($int, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementInt($int));
     }
 
     public function testConvertComplementIntNegativeBoundViaUnpack()
@@ -52,7 +52,7 @@ class OrientDBConvertComplementTest extends PHPUnit_Framework_TestCase
         if (PHP_INT_SIZE == 8) {
             $this->assertNotSame($int, $unpacked);
         }
-        $this->assertSame($int, OrientDBCommandAbstract::convertComplementInt($unpacked));
+        $this->assertSame($int, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementInt($unpacked));
     }
 
     public function testConvertComplementIntMinusOneViaUnpack()
@@ -66,7 +66,7 @@ class OrientDBConvertComplementTest extends PHPUnit_Framework_TestCase
         if (PHP_INT_SIZE == 8) {
             $this->assertNotSame($int, $unpacked);
         }
-        $this->assertSame($int, OrientDBCommandAbstract::convertComplementInt($unpacked));
+        $this->assertSame($int, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementInt($unpacked));
     }
 
     public function testConvertComplementIntPositiveBoundViaUnpack()
@@ -78,7 +78,7 @@ class OrientDBConvertComplementTest extends PHPUnit_Framework_TestCase
         $unpacked = reset($unpacked);
 
         $this->assertSame($int, $unpacked);
-        $this->assertSame($int, OrientDBCommandAbstract::convertComplementInt($unpacked));
+        $this->assertSame($int, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementInt($unpacked));
     }
 
     public function testConvertComplementIntZeroViaUnpack()
@@ -90,28 +90,28 @@ class OrientDBConvertComplementTest extends PHPUnit_Framework_TestCase
         $unpacked = reset($unpacked);
 
         $this->assertSame($int, $unpacked);
-        $this->assertSame($int, OrientDBCommandAbstract::convertComplementInt($unpacked));
+        $this->assertSame($int, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementInt($unpacked));
     }
 
     public function testConvertComplementShortNegativeBound()
     {
         $short = -32768;
 
-        $this->assertSame($short, OrientDBCommandAbstract::convertComplementShort($short));
+        $this->assertSame($short, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementShort($short));
     }
 
     public function testConvertComplementShortPositiveBound()
     {
         $short = 32767;
 
-        $this->assertSame($short, OrientDBCommandAbstract::convertComplementShort($short));
+        $this->assertSame($short, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementShort($short));
     }
 
     public function testConvertComplementShortZero()
     {
         $short = 0;
 
-        $this->assertSame($short, OrientDBCommandAbstract::convertComplementShort($short));
+        $this->assertSame($short, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementShort($short));
     }
 
     public function testConvertComplementShortNegativeBoundViaUnpack()
@@ -123,7 +123,7 @@ class OrientDBConvertComplementTest extends PHPUnit_Framework_TestCase
         $unpacked = reset($unpacked);
 
         $this->assertNotSame($short, $unpacked);
-        $this->assertSame($short, OrientDBCommandAbstract::convertComplementShort($unpacked));
+        $this->assertSame($short, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementShort($unpacked));
     }
 
     public function testConvertComplementShortMinusOneViaUnpack()
@@ -135,7 +135,7 @@ class OrientDBConvertComplementTest extends PHPUnit_Framework_TestCase
         $unpacked = reset($unpacked);
 
         $this->assertNotSame($short, $unpacked);
-        $this->assertSame($short, OrientDBCommandAbstract::convertComplementShort($unpacked));
+        $this->assertSame($short, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementShort($unpacked));
     }
 
     public function testConvertComplementShortPositiveBoundViaUnpack()
@@ -147,7 +147,7 @@ class OrientDBConvertComplementTest extends PHPUnit_Framework_TestCase
         $unpacked = reset($unpacked);
 
         $this->assertSame($short, $unpacked);
-        $this->assertSame($short, OrientDBCommandAbstract::convertComplementShort($unpacked));
+        $this->assertSame($short, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementShort($unpacked));
     }
 
     public function testConvertComplementShortZeroViaUnpack()
@@ -159,6 +159,6 @@ class OrientDBConvertComplementTest extends PHPUnit_Framework_TestCase
         $unpacked = reset($unpacked);
 
         $this->assertSame($short, $unpacked);
-        $this->assertSame($short, OrientDBCommandAbstract::convertComplementShort($unpacked));
+        $this->assertSame($short, \Gratheon\OrientDB\Command\OrientDBCommandAbstract::convertComplementShort($unpacked));
     }
 }

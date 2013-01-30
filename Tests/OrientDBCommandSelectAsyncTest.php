@@ -55,13 +55,13 @@ class OrientDBSelectAsyncTest extends OrientDB_TestCase
         $this->db->DBOpen('demo', 'writer', 'writer');
         $records = $this->db->selectAsync('select * from city limit 7');
         $this->assertInternalType('array', $records);
-        $this->assertInstanceOf('OrientDBRecord', array_pop($records));
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', array_pop($records));
     }
 
     public function testSelectAsyncWithWrongOptionCount()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $record = $this->db->selectAsync();
     }
 
@@ -70,7 +70,7 @@ class OrientDBSelectAsyncTest extends OrientDB_TestCase
         $this->db->DBOpen('demo', 'writer', 'writer');
         $records = $this->db->selectAsync('select from city limit 20', '*:-1');
         $this->assertInternalType('array', $records);
-        $this->assertInstanceOf('OrientDBRecord', array_pop($records));
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', array_pop($records));
     }
 
     public function testSelectAsyncWithNoRecords()

@@ -8,7 +8,6 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -73,35 +72,35 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
     public function testRecordUpdateWithWrongOptionCount()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $record = $this->db->recordUpdate($this->clusterID);
     }
 
     public function testRecordUpdateWithWrongRecordIDOne()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $record = $this->db->recordUpdate('INVALID', $this->recordContent);
     }
 
     public function testRecordUpdateWithWrongRecordIDTwo()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $record = $this->db->recordUpdate(':INVALID', $this->recordContent);
     }
 
     public function testRecordUpdateWithWrongRecordIDThree()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $record = $this->db->recordUpdate('INVALID:', $this->recordContent);
     }
 
     public function testRecordUpdateWithWrongRecordIDFour()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $record = $this->db->recordUpdate('1:INVALID', $this->recordContent);
     }
 
@@ -130,7 +129,7 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
         $this->assertInternalType('integer', $recordPos);
         $result = $this->db->recordDelete($this->clusterID . ':' . $recordPos);
         $this->assertTrue($result);
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd);
     }
 
@@ -191,7 +190,7 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
         $this->db->DBOpen('demo', 'admin', 'admin');
         $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, \Gratheon\OrientDB\OrientDB::RECORD_TYPE_DOCUMENT);
         $this->assertInternalType('integer', $recordPos);
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $version = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContentUpd, 0, '!');
         $this->db->recordDelete($this->clusterID . ':' . $recordPos);
     }
@@ -239,7 +238,7 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
         $record = $this->db->recordLoad($this->clusterID . ':' . $recordPos, '');
         $this->AssertSame($version, $record->version);
         $this->AssertSame($this->recordContentUpd, $record->content);
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $version2 = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContent, $version + 1);
     }
 
@@ -253,7 +252,7 @@ class OrientDBRecordUpdateTest extends OrientDB_TestCase
         $this->AssertSame($version, $record->version);
         $this->AssertSame(1, $version);
         $this->AssertSame($this->recordContentUpd, $record->content);
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $version2 = $this->db->recordUpdate($this->clusterID . ':' . $recordPos, $this->recordContent, $version - 1);
     }
 

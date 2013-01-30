@@ -8,7 +8,6 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -56,12 +55,12 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
         $list = $this->db->recordLoad();
     }
 
-    public function testRecordLoadOnOpenDB()
+    public function RecordLoadOnOpenDB()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
         $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent);
         $record = $this->db->recordLoad($this->clusterID . ':' . $recordPos);
-        $this->assertInstanceOf('OrientDBRecord', $record);
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', $record);
         $this->AssertSame($this->recordContent, $record->content);
         $this->AssertSame($this->clusterID . ':' . $recordPos, $record->recordID);
         $this->assertSame($this->clusterID, $record->clusterID);
@@ -73,35 +72,35 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
     public function testRecordLoadWithWrongOptionCount()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $record = $this->db->recordLoad();
     }
 
     public function testRecordLoadWithWrongRecordIDOne()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $record = $this->db->recordLoad('INVALID', '');
     }
 
     public function testRecordLoadWithWrongRecordIDTwo()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $record = $this->db->recordLoad('INVALID:', '');
     }
 
     public function testRecordLoadWithWrongRecordIDThree()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $record = $this->db->recordLoad(':INVALID', '');
     }
 
     public function testRecordLoadWithWrongRecordIDFour()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $record = $this->db->recordLoad('1:INVALID', '');
     }
 
@@ -136,7 +135,7 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
         $this->db->DBOpen('demo', 'writer', 'writer');
         // Load record Address:100
         $record = $this->db->recordLoad($this->addressClusterID . ':' . 100, '*:-1');
-        $this->assertInstanceOf('OrientDBRecord', $record);
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', $record);
     }
 
     public function testRecordLoadWithFetchPlanAnyOneItem()
@@ -145,7 +144,7 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
         // Load record Address:1
         $this->assertEmpty($this->db->cachedRecords);
         $record = $this->db->recordLoad($this->addressClusterID . ':' . 100, '*:1');
-        $this->assertInstanceOf('OrientDBRecord', $record);
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', $record);
         $this->AssertSame(1, count($this->db->cachedRecords));
         $record = $this->db->recordLoad($this->addressClusterID . ':' . 100, '*:0');
         $this->assertEmpty($this->db->cachedRecords);
@@ -157,7 +156,7 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
         // Load record Address:1
         $this->assertEmpty($this->db->cachedRecords);
         $record = $this->db->recordLoad($this->addressClusterID . ':' . 100, '*:2');
-        $this->assertInstanceOf('OrientDBRecord', $record);
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', $record);
         $this->AssertSame(2, count($this->db->cachedRecords));
         $record = $this->db->recordLoad($this->addressClusterID . ':' . 100, '*:0');
         $this->assertEmpty($this->db->cachedRecords);
@@ -173,10 +172,10 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
         }
         // Load record City:1
         $this->assertEmpty($this->db->cachedRecords);
-        $record = $this->db->recordLoad($cityClusterID . ':' . 1, 'country:1');
-        $this->assertInstanceOf('OrientDBRecord', $record);
+        $record = $this->db->recordLoad($this->cityClusterID . ':' . 1, 'country:1');
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', $record);
         $this->AssertSame(1, count($this->db->cachedRecords));
-        $record = $this->db->recordLoad($cityClusterID . ':' . 1, '*:0');
+        $record = $this->db->recordLoad($this->cityClusterID . ':' . 1, '*:0');
         $this->assertEmpty($this->db->cachedRecords);
     }
 
@@ -190,8 +189,8 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
         }
         // Load record Address:1. Note, that Address hasn't field country
         $this->assertEmpty($this->db->cachedRecords);
-        $record = $this->db->recordLoad($addressClusterID . ':' . 1, 'country:1');
-        $this->assertInstanceOf('OrientDBRecord', $record);
+        $record = $this->db->recordLoad($this->addressClusterID . ':' . 1, 'country:1');
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', $record);
         $this->AssertEmpty($this->db->cachedRecords);
     }
 
@@ -206,7 +205,7 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
             try {
                 $record = $this->db->recordLoad($RID, 'INCORRECT');
             }
-            catch (OrientDBException $e) {
+            catch (\Gratheon\OrientDB\OrientDBException $e) {
                 $failedCnt++;
                 $failedRIDs[] = $RID;
             }
@@ -223,7 +222,7 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
         $rid = '0:0';
         $this->db->DBOpen('demo', 'writer', 'writer');
         $record = $this->db->recordLoad($rid);
-        $this->assertInstanceOf('OrientDBRecord', $record);
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', $record);
         $this->assertSame($rid, $record->recordID);
         $this->assertNotEmpty($record->data);
     }
@@ -233,7 +232,7 @@ class OrientDBRecordLoadTest extends OrientDB_TestCase
         $rid = '0:1';
         $this->db->DBOpen('demo', 'writer', 'writer');
         $record = $this->db->recordLoad($rid);
-        $this->assertInstanceOf('OrientDBRecord', $record);
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', $record);
         $this->assertSame($rid, $record->recordID);
         $this->assertNotEmpty($record->data->indexes);
     }

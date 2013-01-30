@@ -53,7 +53,7 @@ class OrientDBDatagesmentDeleteTest extends OrientDB_TestCase
     public function testDatasegmentDeleteOnOpenDB()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException', 'Not implemented');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException', 'Not implemented');
         $recordPos = $this->db->datasegmentDelete('');
     }
 

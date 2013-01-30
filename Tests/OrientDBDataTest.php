@@ -21,14 +21,14 @@ class OrientDBDataTest extends PHPUnit_Framework_TestCase
 {
     public function  testConstructWithOrientDBRecord()
     {
-        $record = $this->getMock('OrientDBRecord');
+        $record = $this->getMock('\Gratheon\OrientDB\OrientDBRecord');
         $data = new \Gratheon\OrientDB\OrientDBData($record);
         $this->assertInstanceOf('OrientDBData', $data);
     }
 
     public function  testConstructWithOther()
     {
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $data = new \Gratheon\OrientDB\OrientDBData(true);
     }
     // @TODO: add more unittests

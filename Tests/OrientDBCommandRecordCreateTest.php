@@ -65,14 +65,14 @@ class OrientDBRecordCreateTest extends OrientDB_TestCase
     public function testRecordCreateWithWrongOptionCount()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $record = $this->db->recordCreate($this->clusterID);
     }
 
     public function testRecordCreateWithWrongClusterID()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $record = $this->db->recordCreate(1000000, 'INVALID');
     }
 
@@ -103,7 +103,7 @@ class OrientDBRecordCreateTest extends OrientDB_TestCase
     public function testRecordCreateWithWrongType()
     {
         $this->db->DBOpen('demo', 'admin', 'admin');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $recordPos = $this->db->recordCreate($this->clusterID, $this->recordContent, '!');
     }
 

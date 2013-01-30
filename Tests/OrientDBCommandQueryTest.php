@@ -55,13 +55,13 @@ class OrientDBQueryTest extends OrientDB_TestCase
         $this->db->DBOpen('demo', 'writer', 'writer');
         $links = $this->db->query('find references 14:1');
         $this->assertInternalType('array', $links);
-        $this->assertInstanceOf('OrientDBRecord', array_pop($links));
+        $this->assertInstanceOf('\Gratheon\OrientDB\OrientDBRecord', array_pop($links));
     }
 
     public function testQueryWithModeQueryAndFetchPlan()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $records = $this->db->query('', '*:-1');
     }
 }

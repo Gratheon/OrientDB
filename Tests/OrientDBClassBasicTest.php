@@ -8,7 +8,6 @@
  * @package OrientDB-PHP
  */
 
-require_once 'OrientDB.php';
 require_once 'OrientDB_TestCase.php';
 
 /**
@@ -53,7 +52,7 @@ class OrientDBClassBasicTest extends OrientDB_TestCase
 
     public function testProtocolVersion()
     {
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $this->db->setProtocolVersion(1);
     }
 

@@ -71,28 +71,28 @@ class OrientDBDataclusterRemoveTest extends OrientDB_TestCase
     public function testDataclusterRemoveOnOpenDBWriter()
     {
         $clusters = $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $result = $this->db->dataclusterRemove(1);
     }
 
     public function testDataclusterRemoveWithWrongParamCount()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->dataclusterRemove();
     }
 
     public function testDataclusterRemoveWithWrongParamType()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->dataclusterRemove('INVALID');
     }
 
     public function testDataclusterRemoveOnClusterNotExist()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $result = $this->db->dataclusterRemove(10000);
     }
 }

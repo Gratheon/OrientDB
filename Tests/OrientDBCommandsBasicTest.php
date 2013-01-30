@@ -41,13 +41,13 @@ class OrientDBCommandsBasicTest extends OrientDB_TestCase
 
     public function testConnectWithIncorrectUserPassword()
     {
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $this->db->connect('toor', $this->root_password);
     }
 
     public function testConnectWithNotEnougnParams()
     {
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $this->db->connect('root');
     }
 
@@ -71,19 +71,19 @@ class OrientDBCommandsBasicTest extends OrientDB_TestCase
 
     public function testOpenDBWithIncorrectUserPassword()
     {
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $clusters = $this->db->DBOpen('demo', 'writer', 'INCORRECT');
     }
 
     public function testOpenDBWithNonExistentDB()
     {
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $clusters = $this->db->DBOpen('NONEXISTENT', 'writer', 'writer');
     }
 
     public function testOpenDBWithNotEnoughParams()
     {
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $clusters = $this->db->DBOpen('demo');
     }
 

@@ -61,21 +61,21 @@ class OrientDBDataclusterDatarangeTest extends OrientDB_TestCase
     public function testDataclusterDatarangeWithWrongParamCount()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->dataclusterDatarange();
     }
 
     public function testDataclusterDatarangeWithWrongParamType()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->dataclusterDatarange('string');
     }
 
     public function testDataclusterDatarangeOnClusterNotExist()
     {
         $this->db->DBOpen('demo', 'writer', 'writer');
-        $this->setExpectedException('OrientDBException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBException');
         $result = $this->db->dataclusterDatarange(10000);
     }
 

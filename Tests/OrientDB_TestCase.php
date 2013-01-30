@@ -13,6 +13,8 @@
  * @author Anton Terekhov <anton@netmonsters.ru>
  * @package OrientDB-PHP
  * @subpackage Tests
+ *
+ * @property \Gratheon\OrientDB\OrientDB $db
  */
 abstract class OrientDB_TestCase extends PHPUnit_Framework_TestCase
 {

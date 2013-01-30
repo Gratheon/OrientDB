@@ -64,7 +64,7 @@ class OrientDBDBExistsTest extends OrientDB_TestCase
     public function testDBExistsWithWrongOptionCount()
     {
         $this->db->connect('root', $this->root_password);
-        $this->setExpectedException('OrientDBWrongParamsException');
+        $this->setExpectedException('\Gratheon\OrientDB\OrientDBWrongParamsException');
         $result = $this->db->DBExists();
     }
 }
